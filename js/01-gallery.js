@@ -7,7 +7,7 @@ const gallery = document.querySelector(".gallery");
 
 const createLayot = galleryItems
   .map((e) => {
-    return `<li class="gallery__item">
+    const instance = basicLightbox.create(`<li class="gallery__item">
           <a class="gallery__link" href="">
             <img
               class="gallery__image"
@@ -16,7 +16,8 @@ const createLayot = galleryItems
               alt=${e.description}
             />
           </a>
-        </li>`;
+        </li>`);
+    instance.show;
   })
   .join(" ");
 
