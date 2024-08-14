@@ -1,14 +1,12 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-console.log(galleryItems);
-
 const gallery = document.querySelector(".gallery");
 
 const createLayot = galleryItems
   .map((e) => {
-    `<li class="gallery__item">
-          <a class="gallery__link" href="">
+    return `   <li class="gallery__item">
+          <a class="gallery__link" href=${e.original}>
             <img
               class="gallery__image"
               src=${e.preview}
@@ -22,11 +20,26 @@ const createLayot = galleryItems
 
 gallery.insertAdjacentHTML("afterbegin", createLayot);
 
+let instance;
+
 gallery.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.currentTarget === event.target) {
     return;
   }
-  const imgLink = event.target.dataset.source;
-  console.log(imgLink);
+  instance = basicLightbox.create(
+    `
+    <div class="modal">
+        <img src="${event.target.dataset.source}">
+    </div>
+`
+  );
+  instance.show();
+});
+
+window.addEventListener("keydown", (e) => {
+  console.log("123");
+  if (instance && e.key === "Escape") {
+    instance.close();
+  }
 });
