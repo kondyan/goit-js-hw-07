@@ -1,5 +1,4 @@
 import { galleryItems } from "./gallery-items.js";
-import * as SimpleLightbox from "./simple-lightbox.js";
 // Change code below this line
 
 console.log(galleryItems);
@@ -20,14 +19,11 @@ const createLayot = galleryItems
       </li>
     `;
   })
-  .join(" ");
+  .join("");
 
 gallery.insertAdjacentHTML("afterbegin", createLayot);
 
-gallery.addEventListener("click", (event) => {
-  event.preventDefault();
-  if (event.currentTarget === event.target) {
-    return;
-  }
-  new SimpleLightbox({ elements: ".gallery a" });
+let lightbox = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
 });
